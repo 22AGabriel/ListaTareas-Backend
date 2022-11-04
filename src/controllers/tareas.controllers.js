@@ -1,8 +1,15 @@
 import { validationResult } from "express-validator";
 import Tarea from "../models/tarea";
 
-export const listarTareas = (req, res) => {
-  res.send("Esto es una prueba de una peticion get");
+export const listarTareas = async(req, res) => {
+  try {
+    const tareas = await Tarea.find()
+    res.status(200).json(tareas)
+  } catch (error) {
+    res.status(400).json({
+      mensaje: "Error al buscar las tareas"
+    })
+  }
 };
 
 export const crearTarea = async (req, res) => {
