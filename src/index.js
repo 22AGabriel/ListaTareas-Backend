@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import path from 'path';
 import "./database"
+import tareaRouter from "./routes/tareas.routes"
 
 // Intancia de express
 const app = express();
@@ -21,6 +22,4 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname,'../public')));
 
 // Rutas
-app.get("/apilistatareas", (req, res)=>{
-    res.send('Esto es una prueba de una peticion get')
-})
+app.use("/apilistatareas", tareaRouter)
