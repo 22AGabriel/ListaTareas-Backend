@@ -7,7 +7,6 @@ export const listarTareas = (req, res) => {
 export const crearTarea = async (req, res) => {
   // Validar el body
 
-  // Guardar el objeto
   try {
     const tareaNueva = new Tarea(req.body)
     await tareaNueva.save();
@@ -21,3 +20,16 @@ export const crearTarea = async (req, res) => {
     })
   }
 };
+
+export const borrarTarea = async(req, res) => {
+  try {
+    await Tarea.findByIdAndDelete(req.params.id)
+    res.status(200).json({
+      mensaje: "Se eliminó correctamente la tarea"
+    })
+  } catch (error) {
+    res.status(404).json({
+      mensaje: "Error al intentar borrar la tarea"
+    })
+  }
+}
